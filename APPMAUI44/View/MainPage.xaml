@@ -1,0 +1,65 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:APPMAUI44.Core.ViewModel;assembly=APPMAUI44.Core"
+             xmlns:model="clr-namespace:APPMAUI44.Core.Model;assembly=APPMAUI44.Core"
+             x:Class="APPMAUI44.MainPage"
+             x:DataType="vm:MainViewModel"
+            >
+    <ScrollView>
+        <VerticalStackLayout
+            Spacing="25"
+            Padding="30,0"
+            VerticalOptions="Center">
+
+            <Button  
+                x:Name="CounterBtn"
+                Text="Test"
+                SemanticProperties.Hint="Counts the number of times you click"
+                HorizontalOptions="Center"
+                Command="{Binding ChangeValueCommand}"/>
+            <CollectionView ItemsSource="{Binding Persons}">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="vm:PersonViewModel">
+                        <Grid RowDefinitions="Auto,Auto,1">
+                            <Label TextColor="{Binding Path=IsTrainer, Converter={StaticResource IsTrainerToColorConverter},ConverterParameter={Binding }}">
+                                <Label.Triggers>
+                                    <!--<DataTrigger TargetType="Label"
+                                                 Binding="{Binding IsTrainer}"
+                                                 Value="True">
+                                        <Setter Property="TextColor" Value="Red"/>
+                                    </DataTrigger>-->
+                                    <!--<MultiTrigger TargetType="Label">
+                                        <MultiTrigger.Conditions>
+                                            <BindingCondition Binding="{Binding IsTrainer}" Value="true"/>
+                                        </MultiTrigger.Conditions>
+                                        <Setter Property="TextColor" Value="Red"/>
+                                    </MultiTrigger>-->
+                                </Label.Triggers>
+                                <Label.FormattedText>
+                                    <FormattedString>
+                                        <Span Text="{Binding Id,StringFormat='{0}.'}" FontSize="Title"/>
+                                        <Span Text=" " FontSize="Title"/>
+                                        <Span Text="{Binding FullName}"
+                                              FontSize="Title">
+                                            </Span>
+                                    </FormattedString>
+                                </Label.FormattedText>
+                            </Label>
+                            <!---->
+                            <Label Text="{Binding LastName}"
+                                   FontSize="Subtitle"
+                                   Grid.Row="1"/>
+                            <BoxView Color="Black"
+                                     Grid.Row="2"/>
+                        </Grid>
+
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+
+            </CollectionView>
+        </VerticalStackLayout>
+    </ScrollView>
+
+</ContentPage>
+
